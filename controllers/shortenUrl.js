@@ -4,6 +4,6 @@ exports.createShortUrl = (req,res) =>{
     res.send('url shortened')
 }
 
-exports.getShortenUrl = (req,res) =>{
+exports.getShortUrl = (req,res) =>{
     res.send('url sent')
 }

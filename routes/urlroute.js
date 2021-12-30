@@ -1,6 +1,12 @@
+const express=require('express')
 const router=express.Router()
 
-router('/shortener').post(createShortUrl)
+const {createShortUrl,getShortUrl}=require('../controllers/shortenUrl')
 
-router('/:longurl').get(getShortenUrl)
+router.route('/').post(createShortUrl)
+
+router.route('/:longurl').get(getShortUrl)
+
+
+module.exports=router
 
