@@ -1,9 +1,19 @@
+const Url =require('../models/Url')
 
+exports.createShortUrl = (req,res,err) =>{
+    try{
+        res.send('url shortened')
+    }catch(err){
+        console.error(err);
+    }
 
-exports.createShortUrl = (req,res) =>{
-    res.send('url shortened')
 }
 
-exports.getShortUrl = (req,res) =>{
-    res.send('url sent')
+exports.getShortUrl = (req,res,err) =>{
+
+    try{
+        res.send('url sent')
+    }catch(err){
+        console.error(err);
+    }
 }
