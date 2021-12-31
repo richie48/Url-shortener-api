@@ -1,41 +1,65 @@
 const Url =require('../models/Url')
 const shortId=require('shortid')
+const validUrl=require('valid-url')
 
-exports.createShortUrl = (req,res,err) =>{
-    const{longUrl}=req.body
-
-    const baseUrl='http://localhost:5000'
-
-    newUrl=shortId.generate()
-
-    if (toString(longUrl).startsWith('http')){
-
-        
-    }
-
-    const splitUrl=JSON.stringify(longUrl).split('//')
-    const baseUrl=splitUrl[0]
-    console.log(splitUrl)
+exports.createShortUrl = async (req,res,err) =>{
     
-    try{
+    try {
+        const{longUrl}=req.body
 
-        const url =new Url({
-            // url.longUrl=longUrl,
-        })
-        console
-        res.json(longUrl)
+        const baseUrl='http://localhost:5000'
 
-    }catch(err){
+        newCode=shortId.generate()
+
+        //if the longurl is valid then we search through the database to see if we have already a  
+        //shorturl for it, if we don't then we can create the short url.
+        if (validUrl.isUri(longUrl)) {
+        
+          let url = await Url.findOne({ longUrl });
+    
+          if (url) {
+            res.send('A shorturl already exist in database for this url');
+          } else {
+            const shortUrl = baseUrl + '/' + newCode;
+    
+            url = new Url({
+              longUrl,
+              shortUrl,
+              newCode,
+              createdAt:new Date()
+            });
+            
+            //save the new object to database
+            await url.save();
+    
+            res.json(url);
+          }}
+    }catch (err) {
         console.error(err);
+        res.status(500).json('Invalid');
     }
-
 }
 
+
+//endpoint working
 exports.getShortUrl = (req,res,err) =>{
 
     try{
-        res.send('url sent')
+        //so will be hitting the short url endpoint but it will be redirected to the long url
+        const shortUrl=req.params.shortUrl
+
+        //only finding one model in the data that matches the 
+        const link= Url.findOne({newCode:shortUrl})
+        if(link){
+          return res.redirect(link.longUrl)
+        }
+        else{
+          return res.status(404)
+        }
+
+        
     }catch(err){
-        console.error(err);
+        res.status(500)
+        console.log(err.message)
     }
 }

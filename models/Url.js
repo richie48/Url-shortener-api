@@ -2,9 +2,9 @@ const mongoose =require('mongoose')
 
 
 const urlSchema= new mongoose.Schema({
-    longurl:{type:String, required:true},
+    longUrl:{type:String, required:true},
     shortUrl:{type:String},
-    shortId:{type:String},
+    newCode:{type:String},
     createdAt:{
         type: Date,
         default: Date.now,
