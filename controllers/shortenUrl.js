@@ -63,3 +63,11 @@ exports.getShortUrl = (req,res,err) =>{
         console.log(err.message)
     }
 }
+
+
+//schedule the deletion of shorturls after 6 months of getting created.
+const agenda=require('agenda')
+exports.deleteShortUrl=(req,res,err)=>{
+  console.log(Date.now())
+
+}
