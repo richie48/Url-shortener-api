@@ -25,14 +25,15 @@ node server.js
 ### 📬 API Endpoints
 POST /api/shorten
 Description: Shortens a given URL.
-Request Body: json
-{
+Request Body: json   
+{   
   "longUrl": "https://www.example.com"
-}
-Response: json
-{
-  "shortUrl": "http://localhost:3000/abc123"
-}
+}   
+Response: json   
+{   
+  "shortUrl": "http://localhost:3000/abc123"   
+}  
+    
 GET /:code
 Description: Redirects to the original URL corresponding to the given code.
 Example: Accessing http://localhost:3000/abc123 will redirect to https://www.example.com.
