@@ -24,11 +24,11 @@ node server.js
 
 ### 📬 API Endpoints
 POST /api/shorten   
-Description: Shortens a given URL.
+Description: Shortens a given URL.   
 Request Body: json   
 {   
   "longUrl": "https://www.example.com"   
-}   
+}      
 Response: json   
 {   
   "shortUrl": "http://localhost:3000/abc123"   
